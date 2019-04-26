@@ -1,5 +1,8 @@
 package LP;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -8,6 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+//import COMUN.clsActividadRepetida;
+//import LN.clsGestor;
+
 import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 import javax.swing.JDesktopPane;
@@ -20,6 +27,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 
 public class frBusqueda extends JFrame implements ChangeListener, ActionListener{
@@ -27,13 +35,14 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 	private JRadioButton SelectorIda,SelectorIdaVuelta;
 	private ButtonGroup bg;
 	private JPanel contentPane;
-	private JTextField Salida;
-	private JTextField Llegada;
 	private JTextField FechaIda;
 	private JTextField FechaVuelta;
 	private JLabel IdaFecha;
 	private JLabel VueltaFecha;
-
+	private JButton Buscar;
+	private JComboBox<String> AerOrigen, AerDestino;
+	private JLabel ADestino, AOrigen;
+	private String Origen, Destino;
 	/**
 	 * Launch the application.
 	 */
@@ -78,37 +87,24 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 		getContentPane().add(SelectorIdaVuelta);
 		bg.add(SelectorIdaVuelta);
 		
-		Salida = new JTextField();
-		Salida.setToolTipText("Origen");
-		Salida.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		Salida.setBounds(281, 102, 246, 43);
-		contentPane.add(Salida);
-		Salida.setColumns(10);
-		
-		
-		Llegada= new JTextField();
-		Llegada.setToolTipText("Destino");
-		Llegada.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		Llegada.setBounds(281, 190, 246, 43);
-		contentPane.add(Llegada);
-		Llegada.setColumns(10);
-		
-		JLabel AOrigen = new JLabel("AEROPUERTO ORIGEN");
+		AOrigen = new JLabel("AEROPUERTO ORIGEN");
 		AOrigen.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		AOrigen.setBounds(30, 113, 223, 20);
 		contentPane.add(AOrigen);
 		
-		JLabel ADestino = new JLabel("AEROPUERTO DESTINO");
+		ADestino = new JLabel("AEROPUERTO DESTINO");
 		ADestino.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		ADestino.setBounds(30, 201, 236, 20);
 		contentPane.add(ADestino);
 		
 		FechaIda = new JTextField();
+		FechaIda.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		FechaIda.setBounds(702, 102, 177, 43);
 		contentPane.add(FechaIda);
 		FechaIda.setColumns(10);
 		
 		FechaVuelta = new JTextField();
+		FechaVuelta.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		FechaVuelta.setBounds(702, 190, 177, 43);
 		contentPane.add(FechaVuelta);
 		FechaVuelta.setColumns(10);
@@ -123,11 +119,29 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 		VueltaFecha.setBounds(542, 190, 159, 43);
 		contentPane.add(VueltaFecha);
 		
-		JButton Buscar = new JButton("BUSCAR");
+		Buscar = new JButton("BUSCAR");
 		Buscar.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		Buscar.setBounds(400, 271, 135, 48);
 		contentPane.add(Buscar);
+		
+		AerOrigen = new JComboBox<String>();
+		AerOrigen.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		AerOrigen.setBounds(281, 102, 246, 41);
+		contentPane.add(AerOrigen);
+		AerOrigen.addItem("New York");
+		AerOrigen.addItem("Madrid");
+		AerOrigen.addItem("Roma");
+		
+		
+		AerDestino = new JComboBox<String>();
+		AerDestino.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		AerDestino.setBounds(281, 190, 246, 41);
+		contentPane.add(AerDestino);
 		Buscar.addActionListener(this);
+		AerDestino.addItem("Paris");
+		AerDestino.addItem("Bilbao");
+		AerDestino.addItem("Bruselas");
+		
 		
 		
 		
@@ -152,6 +166,41 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		switch (e.getActionCommand())
+		{
+			case "BUSCAR":
+				try
+				{
+					
+					Origen = (String) AerOrigen.getSelectedItem();
+					Destino = (String) AerDestino.getSelectedItem();
+//					clsGestor.NuevaActividad(nombre,codigo,aula,horario,precio);
+					
+					JOptionPane.showMessageDialog(this, "¡GUARDADO CORRECTAMENTE!");
+				
+					dispose();
+				}
+//				catch (clsActividadRepetida a)
+//				{
+//					JOptionPane.showMessageDialog(this, a.getMessage());
+//				}
+				catch (Exception b)
+				{
+					JOptionPane.showMessageDialog(this, "Error en la introducción de algún dato");
+				}
+				break;
 		
 	}
+	}
+	public static boolean validarFecha(String fecha) {
+        try {
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            formatoFecha.setLenient(false);
+            formatoFecha.parse(fecha);
+        } catch (ParseException e) {
+            return false;
+        }
+        return true;
+    }
+
 }
