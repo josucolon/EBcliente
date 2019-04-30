@@ -66,8 +66,8 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 	 */
 	public frBusqueda() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 900, 600);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 900, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -125,6 +125,7 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 		Buscar.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		Buscar.setBounds(400, 271, 135, 48);
 		contentPane.add(Buscar);
+		Buscar.addActionListener(this);
 		
 		AerOrigen = new JComboBox<String>();
 		AerOrigen.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -139,7 +140,6 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 		AerDestino.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		AerDestino.setBounds(281, 190, 246, 41);
 		contentPane.add(AerDestino);
-		Buscar.addActionListener(this);
 		AerDestino.addItem("Paris");
 		AerDestino.addItem("Bilbao");
 		AerDestino.addItem("Bruselas");
