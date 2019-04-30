@@ -17,8 +17,11 @@ public class frInicioSesion extends JFrame implements ActionListener
 
 	private JFrame frame;
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField txtCorreo;
 	private JPasswordField passwordField;
+	
+	private String correo;
+	private String password;
 	
 
 	/**
@@ -43,10 +46,10 @@ public class frInicioSesion extends JFrame implements ActionListener
 		lblPassword.setBounds(15, 126, 85, 20);
 		contentPane.add(lblPassword);
 		
-		textField = new JTextField();
-		textField.setBounds(117, 63, 292, 26);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtCorreo = new JTextField();
+		txtCorreo.setBounds(117, 63, 292, 26);
+		contentPane.add(txtCorreo);
+		txtCorreo.setColumns(10);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(115, 123, 294, 26);
@@ -70,6 +73,20 @@ public class frInicioSesion extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
+		switch (e.getActionCommand())
+		{
+			case "Enter":
+				correo= txtCorreo.getText();
+				password= passwordField.getText();
+				
+				if(true)//usuario y contraseña correcta
+				{
+					//lblPasswordIncorrecta.setVisible(true);
+				}
+				// usuario y/o contrasena incorrectas
+				break;
+			
+		}
 		
 		
 	}
