@@ -42,7 +42,9 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 	private JButton Buscar;
 	private JComboBox<String> AerOrigen, AerDestino;
 	private JLabel ADestino, AOrigen;
-	private String Origen, Destino;
+	private String Origen, Destino, fechaS, fechaL;
+	private boolean ida, vuelta;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -171,15 +173,31 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 			case "BUSCAR":
 				try
 				{
-					
+					vuelta = true;
+					fechaS = FechaIda.getText();
+					ida = validarFecha(fechaS);
+					if (SelectorIdaVuelta.isSelected())
+					{
+						fechaL = FechaVuelta.getText();
+						vuelta = validarFecha(fechaL);
+					}
 					Origen = (String) AerOrigen.getSelectedItem();
 					Destino = (String) AerDestino.getSelectedItem();
 //					clsGestor.NuevaActividad(nombre,codigo,aula,horario,precio);
 					
-					JOptionPane.showMessageDialog(this, "¡GUARDADO CORRECTAMENTE!");
-				
-					dispose();
+					if (ida == true && vuelta == true)
+					{
+						JOptionPane.showMessageDialog(this, "¡GUARDADO CORRECTAMENTE!");
+						frResultadosBusqueda ventana = new frResultadosBusqueda();
+						ventana.setVisible(true);
+						dispose();
+						
+					}
+					else
+						JOptionPane.showMessageDialog(this, "¡FECHA INCORRECTA!");
 				}
+//					dispose();
+				
 //				catch (clsActividadRepetida a)
 //				{
 //					JOptionPane.showMessageDialog(this, a.getMessage());
