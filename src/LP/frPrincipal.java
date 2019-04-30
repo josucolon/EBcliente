@@ -27,7 +27,7 @@ public class frPrincipal extends JFrame implements ActionListener
 	public frPrincipal() {
 		
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 500, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -95,9 +95,12 @@ public class frPrincipal extends JFrame implements ActionListener
 			case "Registro":
 				break;
 			case "Facebook":
-				
+				frInicioSesion Face =new frInicioSesion();
+				Face.setVisible(true);
 				break;
 			case "Google":
+				frInicioSesion Goog =new frInicioSesion();
+				Goog.setVisible(true);
 				break;
 		}
 		
