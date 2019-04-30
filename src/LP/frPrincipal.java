@@ -22,6 +22,7 @@ public class frPrincipal extends JFrame implements ActionListener
 {
 	
 	private JPanel contentPane;
+
 	
 	public frPrincipal() {
 		
@@ -76,9 +77,11 @@ public class frPrincipal extends JFrame implements ActionListener
 		lblFBimage.setIcon(imgFB2);
 		
 		JLabel lblGgImage = new JLabel("New label");
-		lblGgImage.setBounds(33, 333, 69, 61);
+		lblGgImage.setBounds(26, 333, 69, 56);
 		contentPane.add(lblGgImage);
-		
+		Image imgGg= new ImageIcon("image/Google.png").getImage();
+		ImageIcon imgGg2=new ImageIcon(imgGg.getScaledInstance(69, 56, Image.SCALE_SMOOTH));
+		lblGgImage.setIcon(imgGg2);
 	
 		
 		
@@ -92,6 +95,7 @@ public class frPrincipal extends JFrame implements ActionListener
 			case "Registro":
 				break;
 			case "Facebook":
+				
 				break;
 			case "Google":
 				break;
@@ -109,7 +113,6 @@ public class frPrincipal extends JFrame implements ActionListener
 		frPrincipal ventana =new frPrincipal();
 		ventana.setVisible(true);
 	}
-	
 	
 	
 	
