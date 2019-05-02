@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+import java.awt.Color;
 
 public class frInicioSesion extends JFrame implements ActionListener
 {
@@ -22,7 +23,7 @@ public class frInicioSesion extends JFrame implements ActionListener
 	
 	private String correo;
 	private String password;
-	
+	private JLabel lblPasswordIncorrecta;
 
 	/**
 	 * Create the application.
@@ -61,7 +62,8 @@ public class frInicioSesion extends JFrame implements ActionListener
 		btnEnter.addActionListener(this);
 		btnEnter.setActionCommand("Enter");
 		
-		JLabel lblPasswordIncorrecta = new JLabel("Usuario y/o contrase\u00F1a incorrectas");
+		lblPasswordIncorrecta = new JLabel("Usuario y/o contrase\u00F1a incorrectas");
+		lblPasswordIncorrecta.setForeground(Color.RED);
 		lblPasswordIncorrecta.setBounds(117, 155, 292, 20);
 		contentPane.add(lblPasswordIncorrecta);
 		lblPasswordIncorrecta.setVisible(false);
@@ -81,9 +83,14 @@ public class frInicioSesion extends JFrame implements ActionListener
 				
 				if(true)//usuario y contraseña correcta
 				{
-					//lblPasswordIncorrecta.setVisible(true);
+					lblPasswordIncorrecta.setForeground(Color.green);
+					lblPasswordIncorrecta.setVisible(true);
+					
+					frBusqueda busqueda =new frBusqueda();
+					busqueda.setVisible(true);
 				}
 				// usuario y/o contrasena incorrectas
+				lblPasswordIncorrecta.setVisible(true);
 				break;
 			
 		}

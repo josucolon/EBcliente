@@ -93,6 +93,8 @@ public class frPrincipal extends JFrame implements ActionListener
 		switch (e.getActionCommand())
 		{
 			case "Registro":
+				frRegistro registro =new frRegistro();
+				registro.setVisible(true);
 				break;
 			case "Facebook":
 				frInicioSesion Face =new frInicioSesion();
