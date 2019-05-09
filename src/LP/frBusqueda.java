@@ -14,6 +14,7 @@ import javax.swing.event.ChangeListener;
 
 import Controller.EBController;
 import LN.Vuelo;
+import LN.VueloController;
 
 //import COMUN.clsActividadRepetida;
 //import LN.clsGestor;
@@ -178,40 +179,48 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 			case "BUSCAR":
 				try
 				{
-					vuelta = false;
 					
-					if (SelectorIdaVuelta.isSelected() && ida == true && vuelta == true)
+					if (SelectorIdaVuelta.isSelected() )
 					{
 						fechaL = FechaVuelta.getText();
 						vuelta = validarFecha(fechaL);
 						fechaS = FechaIda.getText();
 						ida = validarFecha(fechaS);
+						if (ida == true && vuelta == true)
+						{
 						Origen = (String) AerOrigen.getSelectedItem();
 						Destino = (String) AerDestino.getSelectedItem();
 						listaVuelosIda = EBController.buscarvuelo(Origen, Destino, fechaS);
 						listaVuelosVuelta = EBController.buscarvuelo(Destino, Origen, fechaL);
 						JOptionPane.showMessageDialog(this, "¡BÚSQUEDA REALIZADA!");
-						frResultadosBusqueda ventana = new frResultadosBusqueda(listaVuelosIda, listaVuelosVuelta);
+						frResultadosBusqueda ventana = new frResultadosBusqueda();
 						ventana.setVisible(true);
 						dispose();
+						}
+						else
+							JOptionPane.showMessageDialog(this, "¡FECHA INCORRECTA!");
 					}
-					if (!SelectorIdaVuelta.isSelected() && ida == true && vuelta == false)
+					if (SelectorIda.isSelected())
 					{
 //						fechaL = FechaVuelta.getText();
 //						vuelta = validarFecha(fechaL);
 						fechaS = FechaIda.getText();
 						ida = validarFecha(fechaS);
+						if (ida == true)
+						{
 						Origen = (String) AerOrigen.getSelectedItem();
 						Destino = (String) AerDestino.getSelectedItem();
 						listaVuelosIda = EBController.buscarvuelo(Origen, Destino, fechaS);
+						VueloController.getInstance().setVuelos(listaVuelosIda);
 						JOptionPane.showMessageDialog(this, "¡BÚSQUEDA REALIZADA!");
 						frResultadosBusqueda ventana = new frResultadosBusqueda();
 						ventana.setVisible(true);
 						dispose();
-						
+						}
+						else
+							JOptionPane.showMessageDialog(this, "¡FECHA INCORRECTA!");
 					}
-					else
-						JOptionPane.showMessageDialog(this, "¡FECHA INCORRECTA!");
+					
 				}
 //					dispose();
 				

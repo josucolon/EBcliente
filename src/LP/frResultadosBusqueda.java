@@ -9,10 +9,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import LN.Vuelo;
+import LN.VueloController;
 
 public class frResultadosBusqueda extends JFrame {
 
 	private JPanel contentPane;
+
+	
+
 
 	/**
 	 * Launch the application.
@@ -33,7 +37,7 @@ public class frResultadosBusqueda extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public frResultadosBusqueda() {
+	public void frResultadosBusqueda() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 900, 600);
@@ -41,11 +45,8 @@ public class frResultadosBusqueda extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		ArrayList<Vuelo> vuelos = VueloController.getInstance().getVuelos();
 	}
 
-
-	public frResultadosBusqueda(ArrayList<Vuelo> listaVuelosIda, ArrayList<Vuelo> listaVuelosVuelta) {
-		// TODO Auto-generated constructor stub
-	}
 
 }
