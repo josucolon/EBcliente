@@ -12,7 +12,7 @@ public class RMIServiceLocator
 	 * Proposed improvement: list of services
 	 */
 	
-//	private ITVProgramManager service = null;
+	private I_FacadeEB service = null;
 
     /** Creates a new instance of RMIServiceLocator */
     public RMIServiceLocator() { }
@@ -30,8 +30,8 @@ public class RMIServiceLocator
 		{
 			Registry registry = LocateRegistry.getRegistry(((Integer.valueOf(port))));
 			String name = "//" + ip + ":" + port + "/" + serviceName;			
-//			this.service = (ITVProgramManager) registry.lookup(name);
-//			System.out.println("* Server: " + this.getService().sayHello() );			
+			this.service = (I_FacadeEB) registry.lookup(name);
+			System.out.println("* Server: " + this.getService() );			
 		} 
 		catch (Exception e) 
 		{
@@ -40,9 +40,9 @@ public class RMIServiceLocator
 		}
     }
     
-//    public ITVProgramManager getService() 
-//    {    	
-//    	return this.service;
-//    }
+    public I_FacadeEB getService() 
+    {    	
+    	return this.service;
+    }
 
 }
