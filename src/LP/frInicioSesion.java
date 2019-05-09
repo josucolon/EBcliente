@@ -68,6 +68,14 @@ public class frInicioSesion extends JFrame implements ActionListener
 		contentPane.add(lblPasswordIncorrecta);
 		lblPasswordIncorrecta.setVisible(false);
 		
+		JButton btnAtras = new JButton("Atras");
+		btnAtras.setBounds(15, 191, 69, 29);
+		contentPane.add(btnAtras);
+		btnAtras.addActionListener(this);
+		btnAtras.setActionCommand("Atras");
+		
+		
+		
 	}
 
 
@@ -88,9 +96,17 @@ public class frInicioSesion extends JFrame implements ActionListener
 					
 					frBusqueda busqueda =new frBusqueda();
 					busqueda.setVisible(true);
+					this.dispose();
 				}
 				// usuario y/o contrasena incorrectas
 				lblPasswordIncorrecta.setVisible(true);
+				break;
+				
+			case "Atras":
+				frPrincipal ventana =new frPrincipal();
+				ventana.setVisible(true);
+				this.dispose();
+				
 				break;
 			
 		}

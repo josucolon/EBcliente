@@ -24,6 +24,7 @@ public class frPayPal extends JFrame implements ActionListener
 	private JLabel lblPasswordIncorrecta;
 	private String usuario;
 	private String password;
+	private JButton btnAtras;
 	/**
 	 * Create the application.
 	 */
@@ -66,6 +67,12 @@ public class frPayPal extends JFrame implements ActionListener
 		contentPane.add(lblPasswordIncorrecta);
 		lblPasswordIncorrecta.setVisible(false);
 		
+		btnAtras = new JButton("Atras");
+		btnAtras.setBounds(15, 196, 69, 29);
+		contentPane.add(btnAtras);	
+		btnAtras.addActionListener(this);
+		btnAtras.setActionCommand("Atras");
+		
 	}
 
 
@@ -84,11 +91,18 @@ public class frPayPal extends JFrame implements ActionListener
 					lblPasswordIncorrecta.setForeground(Color.green);
 					lblPasswordIncorrecta.setVisible(true);
 					
-					frBusqueda busqueda =new frBusqueda();
-					busqueda.setVisible(true);
+					//frBusqueda busqueda =new frBusqueda();
+					//busqueda.setVisible(true);
 				}
 				// usuario y/o contrasena incorrectas
 				lblPasswordIncorrecta.setVisible(true);
+				break;
+				
+			case "Atras":
+				frBusqueda ventana =new frBusqueda();
+				ventana.setVisible(true);
+				this.dispose();
+				
 				break;
 			
 		}

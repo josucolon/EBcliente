@@ -98,6 +98,12 @@ public class frVisa extends JFrame implements ActionListener
 		btnPagar.addActionListener(this);
 		btnPagar.setActionCommand("Pagar");
 		
+		JButton btnAtras = new JButton("Atras");
+		btnAtras.setBounds(15, 231, 69, 29);
+		contentPane.add(btnAtras);
+		btnAtras.addActionListener(this);
+		btnAtras.setActionCommand("Atras");
+		
 	}
 
 
@@ -108,6 +114,13 @@ public class frVisa extends JFrame implements ActionListener
 		switch (e.getActionCommand())
 		{
 			case "Pagar":
+				
+				break;
+				
+			case "Atras":
+				frBusqueda busq =new frBusqueda();
+				busq.setVisible(true);
+				this.dispose();
 				
 				break;
 			

@@ -146,6 +146,11 @@ public class frRegistro extends JFrame implements ActionListener
 		btnRegistrarse.addActionListener(this);
 		btnRegistrarse.setActionCommand("Registro");
 		
+		JButton btnAtras = new JButton("Atras");
+		btnAtras.setBounds(15, 424, 69, 29);
+		contentPane.add(btnAtras);
+		btnAtras.addActionListener(this);
+		btnAtras.setActionCommand("Atras");
 		
 	}
 
@@ -159,6 +164,14 @@ public class frRegistro extends JFrame implements ActionListener
 			case "Registro":
 				frVisa ventana =new frVisa();
 				ventana.setVisible(true);
+				this.dispose();
+				break;
+				
+			case "Atras":
+				frPrincipal princ =new frPrincipal();
+				princ.setVisible(true);
+				this.dispose();
+				
 				break;
 			
 		}

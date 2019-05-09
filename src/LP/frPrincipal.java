@@ -95,14 +95,17 @@ public class frPrincipal extends JFrame implements ActionListener
 			case "Registro":
 				frRegistro registro =new frRegistro();
 				registro.setVisible(true);
+				this.dispose();
 				break;
 			case "Facebook":
 				frInicioSesion Face =new frInicioSesion();
 				Face.setVisible(true);
+				this.dispose();
 				break;
 			case "Google":
 				frInicioSesion Goog =new frInicioSesion();
 				Goog.setVisible(true);
+				this.dispose();
 				break;
 		}
 		
