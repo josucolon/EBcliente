@@ -1,6 +1,8 @@
-package LP;
+package Controller;
 
 import java.rmi.RemoteException;
+
+import SL.RMIServiceLocator;
 
 
 
