@@ -2,10 +2,13 @@ package LP;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import LN.Vuelo;
 
 public class frResultadosBusqueda extends JFrame {
 
@@ -38,6 +41,11 @@ public class frResultadosBusqueda extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+	}
+
+
+	public frResultadosBusqueda(ArrayList<Vuelo> listaVuelosIda, ArrayList<Vuelo> listaVuelosVuelta) {
+		// TODO Auto-generated constructor stub
 	}
 
 }

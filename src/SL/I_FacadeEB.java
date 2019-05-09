@@ -2,17 +2,20 @@ package SL;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+
+import LN.Usuario;
+import LN.Vuelo;
 
 public interface I_FacadeEB extends Remote
 {
-	public void buscarvuelo(String Origen, String Destinio, String fecha)throws RemoteException; 
+	public ArrayList<Vuelo> buscarvuelo(String Origen, String Destinio, String fecha)throws RemoteException; 
 	
-    public void registro(String nombre, String apellido, String apellido2, String dni, String password, String pago,
-    		String modoInicio, String correo)throws RemoteException; 
+    public void registro(Usuario usuario)throws RemoteException; 
     
-    public void InicioSesionG(String usuario, String password)throws RemoteException;  
+    public Usuario InicioSesionG(String usuario, String password)throws RemoteException;  
     
-    public void InicioSesionF(String usuario, String password)throws RemoteException; 
+    public Usuario InicioSesionF(String usuario, String password)throws RemoteException; 
     	
     public void Visa(String nombre, int numTarj, int mes, int ano, int cvv)throws RemoteException;
     	

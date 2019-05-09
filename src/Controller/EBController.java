@@ -1,7 +1,10 @@
 package Controller;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
+import LN.Usuario;
+import LN.Vuelo;
 import LP.frInicioSesion;
 import LP.frPrincipal;
 import SL.RMIServiceLocator;
@@ -10,7 +13,7 @@ import SL.RMIServiceLocator;
 
 public class EBController 
 {
-private RMIServiceLocator rsl = null;
+private static RMIServiceLocator rsl = null;
 	
 	public EBController(String[] args) throws RemoteException 
 	{		
@@ -55,25 +58,31 @@ private RMIServiceLocator rsl = null;
 //		System.out.println("- Switching to server: " + ip + ":" + port + "/" + name);
 //	}
   
-    public void buscarvuelo(String Origen, String Destinio, String fecha) throws RemoteException 
+    public static ArrayList<Vuelo> buscarvuelo(String Origen, String Destinio, String fecha) throws RemoteException 
     {
-    	rsl.getService().buscarvuelo(Origen, Destinio, fecha);
+    	ArrayList<Vuelo> listaVuelos;
+    	listaVuelos = rsl.getService().buscarvuelo(Origen, Destinio, fecha);
+    	return listaVuelos;
+    	
     }
     
-    public void registro(String nombre, String apellido, String apellido2, String dni, String password, String pago,
-    		String modoInicio, String correo) throws RemoteException 
+    public void registro(Usuario usuario) throws RemoteException 
     {
-    	rsl.getService().registro(nombre, apellido, apellido2, dni, password, pago, modoInicio, correo);
+    	rsl.getService().registro(usuario);
     }
     
-    public void InicioSesionG(String usuario, String password) throws RemoteException
+    public Usuario InicioSesionG(String usuario, String password) throws RemoteException
     {
-    	rsl.getService().InicioSesionG(usuario, password);
+    	Usuario usu;
+    	usu = rsl.getService().InicioSesionG(usuario, password);
+    	return usu;
     }
     
-    public void InicioSesionF(String usuario, String password) throws RemoteException
+    public Usuario InicioSesionF(String usuario, String password) throws RemoteException
     {
-    	rsl.getService().InicioSesionF(usuario, password);
+    	Usuario usu;
+    	usu = rsl.getService().InicioSesionF(usuario, password);
+    	return usu;
     }
 
     public void Visa(String nombre, int numTarj, int mes, int ano, int cvv) throws RemoteException

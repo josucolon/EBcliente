@@ -2,7 +2,7 @@ package LP;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
+import java.util.ArrayList;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import Controller.EBController;
+import LN.Vuelo;
 
 //import COMUN.clsActividadRepetida;
 //import LN.clsGestor;
@@ -44,6 +47,8 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 	private JLabel ADestino, AOrigen;
 	private String Origen, Destino, fechaS, fechaL;
 	private boolean ida, vuelta;
+	private ArrayList<Vuelo> listaVuelosIda;
+	private ArrayList<Vuelo> listaVuelosVuelta;
 	
 	/**
 	 * Launch the application.
@@ -173,21 +178,33 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 			case "BUSCAR":
 				try
 				{
-					vuelta = true;
-					fechaS = FechaIda.getText();
-					ida = validarFecha(fechaS);
-					if (SelectorIdaVuelta.isSelected())
+					vuelta = false;
+					
+					if (SelectorIdaVuelta.isSelected() && ida == true && vuelta == true)
 					{
 						fechaL = FechaVuelta.getText();
 						vuelta = validarFecha(fechaL);
+						fechaS = FechaIda.getText();
+						ida = validarFecha(fechaS);
+						Origen = (String) AerOrigen.getSelectedItem();
+						Destino = (String) AerDestino.getSelectedItem();
+						listaVuelosIda = EBController.buscarvuelo(Origen, Destino, fechaS);
+						listaVuelosVuelta = EBController.buscarvuelo(Destino, Origen, fechaL);
+						JOptionPane.showMessageDialog(this, "¡BÚSQUEDA REALIZADA!");
+						frResultadosBusqueda ventana = new frResultadosBusqueda(listaVuelosIda, listaVuelosVuelta);
+						ventana.setVisible(true);
+						dispose();
 					}
-					Origen = (String) AerOrigen.getSelectedItem();
-					Destino = (String) AerDestino.getSelectedItem();
-//					clsGestor.NuevaActividad(nombre,codigo,aula,horario,precio);
-					
-					if (ida == true && vuelta == true)
+					if (!SelectorIdaVuelta.isSelected() && ida == true && vuelta == false)
 					{
-						JOptionPane.showMessageDialog(this, "¡GUARDADO CORRECTAMENTE!");
+//						fechaL = FechaVuelta.getText();
+//						vuelta = validarFecha(fechaL);
+						fechaS = FechaIda.getText();
+						ida = validarFecha(fechaS);
+						Origen = (String) AerOrigen.getSelectedItem();
+						Destino = (String) AerDestino.getSelectedItem();
+						listaVuelosIda = EBController.buscarvuelo(Origen, Destino, fechaS);
+						JOptionPane.showMessageDialog(this, "¡BÚSQUEDA REALIZADA!");
 						frResultadosBusqueda ventana = new frResultadosBusqueda();
 						ventana.setVisible(true);
 						dispose();
