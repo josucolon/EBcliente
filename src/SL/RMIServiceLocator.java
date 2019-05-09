@@ -31,7 +31,7 @@ public class RMIServiceLocator
 			Registry registry = LocateRegistry.getRegistry(((Integer.valueOf(port))));
 			String name = "//" + ip + ":" + port + "/" + serviceName;			
 			this.service = (I_FacadeEB) registry.lookup(name);
-			System.out.println("* Server: " + this.getService() );			
+//			System.out.println("* Server: " + this.getService() );			
 		} 
 		catch (Exception e) 
 		{
