@@ -2,6 +2,8 @@ package Controller;
 
 import java.rmi.RemoteException;
 
+import LP.frInicioSesion;
+import LP.frPrincipal;
 import SL.RMIServiceLocator;
 
 
@@ -16,7 +18,7 @@ private RMIServiceLocator rsl = null;
 		rsl = new RMIServiceLocator();
 		rsl.setService(args[0], args[1], args[2]);
 				
-//		new SMSWindow(this);
+		new frInicioSesion(this);
 //		new SwitchServerGUI(this);		
 	}
 	
@@ -53,29 +55,35 @@ private RMIServiceLocator rsl = null;
 //		System.out.println("- Switching to server: " + ip + ":" + port + "/" + name);
 //	}
   
-    public void buscarvuelo(String Origen, String Destinio, String fecha) {
-    	//This method will be use in other Labs.
+    public void buscarvuelo(String Origen, String Destinio, String fecha) throws RemoteException 
+    {
+    	rsl.getService().buscarvuelo(Origen, Destinio, fecha);
     }
     
     public void registro(String nombre, String apellido, String apellido2, String dni, String password, String pago,
-    		String modoInicio, String correo) {
-    	//This method will be use in other Labs.
+    		String modoInicio, String correo) throws RemoteException 
+    {
+    	rsl.getService().registro(nombre, apellido, apellido2, dni, password, pago, modoInicio, correo);
     }
     
-    public void InicioSesionG(String usuario, String password) {
-    	//This method will be use in other Labs.
+    public void InicioSesionG(String usuario, String password) throws RemoteException
+    {
+    	rsl.getService().InicioSesionG(usuario, password);
     }
     
-    public void InicioSesionF(String usuario, String password) {
-    	//This method will be use in other Labs.
+    public void InicioSesionF(String usuario, String password) throws RemoteException
+    {
+    	rsl.getService().InicioSesionF(usuario, password);
     }
 
-    public void Visa(String nombre, int numTarj, int mes, int ano, int cvv) {
-    	//This method will be use in other Labs.
+    public void Visa(String nombre, int numTarj, int mes, int ano, int cvv) throws RemoteException
+    {
+    	rsl.getService().Visa(nombre, numTarj, mes, ano, cvv);
     }
 
-    public void payPal(String usuario, String password) {
-    	//This method will be use in other Labs.
+    public void payPal(String usuario, String password) throws RemoteException
+    {
+    	rsl.getService().payPal(usuario, password);
     }
     
     public void exit(){

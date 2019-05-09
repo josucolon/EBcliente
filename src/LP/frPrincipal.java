@@ -9,6 +9,9 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Controller.EBController;
+
+
 import java.awt.BorderLayout;
 
 import javax.swing.ImageIcon;
@@ -22,9 +25,11 @@ public class frPrincipal extends JFrame implements ActionListener
 {
 	
 	private JPanel contentPane;
-
+	private EBController controller;
 	
 	public frPrincipal() {
+		
+		
 		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -98,14 +103,14 @@ public class frPrincipal extends JFrame implements ActionListener
 				this.dispose();
 				break;
 			case "Facebook":
-				frInicioSesion Face =new frInicioSesion();
-				Face.setVisible(true);
-				this.dispose();
+//				frInicioSesion Face =new frInicioSesion();
+//				Face.setVisible(true);
+//				this.dispose();
 				break;
 			case "Google":
-				frInicioSesion Goog =new frInicioSesion();
-				Goog.setVisible(true);
-				this.dispose();
+//				frInicioSesion Goog =new frInicioSesion();
+//				Goog.setVisible(true);
+//				this.dispose();
 				break;
 		}
 		
@@ -113,14 +118,8 @@ public class frPrincipal extends JFrame implements ActionListener
 	
 
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		
-		frPrincipal ventana =new frPrincipal();
-		ventana.setVisible(true);
-	}
+
+
 	
 	
 	

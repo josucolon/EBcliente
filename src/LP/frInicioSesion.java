@@ -7,6 +7,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Controller.EBController;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -24,12 +27,14 @@ public class frInicioSesion extends JFrame implements ActionListener
 	private String correo;
 	private String password;
 	private JLabel lblPasswordIncorrecta;
+	private EBController controller;
 
 	/**
 	 * Create the application.
 	 */
-	public frInicioSesion() 
+	public frInicioSesion(EBController controller) 
 	{
+		this.controller = controller;
 		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
