@@ -27,9 +27,9 @@ public class frPrincipal extends JFrame implements ActionListener
 	private JPanel contentPane;
 	private EBController controller;
 	
-	public frPrincipal() {
+	public frPrincipal(EBController controller) {
 		
-		
+		this.controller = controller;
 		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -98,19 +98,19 @@ public class frPrincipal extends JFrame implements ActionListener
 		switch (e.getActionCommand())
 		{
 			case "Registro":
-				frRegistro registro =new frRegistro();
+				frRegistro registro =new frRegistro(controller);
 				registro.setVisible(true);
 				this.dispose();
 				break;
 			case "Facebook":
-//				frInicioSesion Face =new frInicioSesion();
-//				Face.setVisible(true);
-//				this.dispose();
+				frInicioSesion Face =new frInicioSesion(controller, "FACEBOOK");
+				Face.setVisible(true);
+				this.dispose();
 				break;
 			case "Google":
-//				frInicioSesion Goog =new frInicioSesion();
-//				Goog.setVisible(true);
-//				this.dispose();
+				frInicioSesion Goog =new frInicioSesion(controller, "GOOGLE");
+				Goog.setVisible(true);
+				this.dispose();
 				break;
 		}
 		

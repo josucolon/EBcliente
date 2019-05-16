@@ -3,12 +3,14 @@ package LP;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Controller.EBController;
+import LN.Usuario;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -28,13 +30,16 @@ public class frInicioSesion extends JFrame implements ActionListener
 	private String password;
 	private JLabel lblPasswordIncorrecta;
 	private EBController controller;
+	private Usuario usuario;
+	private String FoG;
 
 	/**
 	 * Create the application.
 	 */
-	public frInicioSesion(EBController controller) 
+	public frInicioSesion(EBController controller, String GoF) 
 	{
 		this.controller = controller;
+		FoG=GoF;
 		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -94,21 +99,52 @@ public class frInicioSesion extends JFrame implements ActionListener
 				correo= txtCorreo.getText();
 				password= passwordField.getText();
 				
-				if(true)//usuario y contraseña correcta
+				if(FoG == "GOOGLE")
 				{
-					lblPasswordIncorrecta.setForeground(Color.green);
-					lblPasswordIncorrecta.setVisible(true);
-					
-					frBusqueda busqueda =new frBusqueda();
-					busqueda.setVisible(true);
-					this.dispose();
+					try 
+					{
+						usuario = controller.InicioSesionG(correo, password);
+						lblPasswordIncorrecta.setForeground(Color.green);
+						lblPasswordIncorrecta.setVisible(true);
+						
+//						frBusqueda busqueda =new frBusqueda(controller, usuario);
+//						busqueda.setVisible(true);
+//						this.dispose();
+					} 
+					catch (RemoteException e1) 
+					{
+						lblPasswordIncorrecta.setVisible(true);
+						lblPasswordIncorrecta.setForeground(Color.red);
+						e1.printStackTrace();
+					}
 				}
-				// usuario y/o contrasena incorrectas
-				lblPasswordIncorrecta.setVisible(true);
+				
+				if(FoG == "FACEBOOK")
+				{
+					try 
+					{
+						usuario = controller.InicioSesionF(correo, password);
+						lblPasswordIncorrecta.setForeground(Color.green);
+						lblPasswordIncorrecta.setVisible(true);
+						
+//						frBusqueda busqueda =new frBusqueda(controller, usuario);
+//						busqueda.setVisible(true);
+//						this.dispose();
+					} 
+					catch (RemoteException e1) 
+					{
+						lblPasswordIncorrecta.setVisible(true);
+						lblPasswordIncorrecta.setForeground(Color.red);
+						e1.printStackTrace();
+					}
+				}
+				
+			
+				
 				break;
 				
 			case "Atras":
-				frPrincipal ventana =new frPrincipal();
+				frPrincipal ventana =new frPrincipal(controller);
 				ventana.setVisible(true);
 				this.dispose();
 				

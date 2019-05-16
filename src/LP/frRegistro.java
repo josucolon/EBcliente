@@ -4,10 +4,15 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Controller.EBController;
+import LN.Usuario;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -29,13 +34,21 @@ public class frRegistro extends JFrame implements ActionListener
 	private JPasswordField passwordField;
 	private ButtonGroup bgPago;
 	private ButtonGroup bgInicioSesion;
-	
+	private EBController controller;
+	private Usuario usuario;
+	private JComboBox CboxAeropuerto;
+	private JRadioButton rdbtnPaypal;
+	private JRadioButton rdbtnVisa;
+	private JRadioButton rdbtnFacebook;
+	private JRadioButton rdbtnGoogle;
 
 	/**
 	 * Create the application.
 	 */
-	public frRegistro()
+	public frRegistro(EBController controller)
 	{
+		this.controller=controller;
+		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 451, 505);
@@ -94,19 +107,23 @@ public class frRegistro extends JFrame implements ActionListener
 		lblAeropuertoPorDefecto.setBounds(15, 223, 178, 20);
 		contentPane.add(lblAeropuertoPorDefecto);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(208, 220, 222, 26);
-		contentPane.add(comboBox);
+		CboxAeropuerto = new JComboBox();
+		CboxAeropuerto.setBounds(208, 220, 222, 26);
+		contentPane.add(CboxAeropuerto);
+		CboxAeropuerto.addItem("Loiu");
+		CboxAeropuerto.addItem("El Prat de Llobregat");
+		CboxAeropuerto.addItem("Barajas");
+		
 		
 		JLabel lblPago = new JLabel("Pago:");
 		lblPago.setBounds(15, 277, 47, 20);
 		contentPane.add(lblPago);
 		
-		JRadioButton rdbtnPaypal = new JRadioButton("PayPal");
+		rdbtnPaypal = new JRadioButton("PayPal");
 		rdbtnPaypal.setBounds(119, 273, 107, 29);
 		contentPane.add(rdbtnPaypal);
 		
-		JRadioButton rdbtnVisa = new JRadioButton("Visa");
+		rdbtnVisa = new JRadioButton("Visa");
 		rdbtnVisa.setBounds(249, 273, 87, 29);
 		contentPane.add(rdbtnVisa);
 		
@@ -118,11 +135,11 @@ public class frRegistro extends JFrame implements ActionListener
 		lblInicioSesion.setBounds(15, 327, 94, 20);
 		contentPane.add(lblInicioSesion);
 		
-		JRadioButton rdbtnFacebook = new JRadioButton("FaceBook");
+		rdbtnFacebook = new JRadioButton("FaceBook");
 		rdbtnFacebook.setBounds(119, 323, 107, 29);
 		contentPane.add(rdbtnFacebook);
 		
-		JRadioButton rdbtnGoogle = new JRadioButton("Google");
+		rdbtnGoogle = new JRadioButton("Google");
 		rdbtnGoogle.setBounds(249, 323, 155, 29);
 		contentPane.add(rdbtnGoogle);
 		
@@ -162,13 +179,50 @@ public class frRegistro extends JFrame implements ActionListener
 		switch (e.getActionCommand())
 		{
 			case "Registro":
+				
+				usuario.setNombre(txtNombre.getText());
+				usuario.setApellido(txtApellido1.getText());
+				usuario.setApellido2(txtApellido2.getText());
+				usuario.setDni(txtDni.getText());
+				usuario.setEmail(txtCorreo.getText());
+				usuario.setAeropuerto_ident((String)CboxAeropuerto.getSelectedItem());
+				usuario.setContrasena(passwordField.getSelectedText());
+				if(rdbtnPaypal.isSelected())
+				{
+					usuario.setPago("PAYPAL");
+				}
+				else
+				{
+					usuario.setPago("VISA");
+				}
+				
+				if(rdbtnFacebook.isSelected())
+				{
+					usuario.setSistema_auto("GOOGLE");
+				}
+				else
+				{
+					usuario.setSistema_auto("FACEBOOK");
+				}
+				
+			try 
+			{
+				controller.registro(usuario);
+			} 
+			catch (RemoteException e1) 
+			{
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+				
+				
 				frVisa ventana =new frVisa();
 				ventana.setVisible(true);
 				this.dispose();
 				break;
 				
 			case "Atras":
-				frPrincipal princ =new frPrincipal();
+				frPrincipal princ =new frPrincipal(controller);
 				princ.setVisible(true);
 				this.dispose();
 				

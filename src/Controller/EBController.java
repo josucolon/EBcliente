@@ -10,18 +10,17 @@ import LP.frPrincipal;
 import SL.RMIServiceLocator;
 
 
-
 public class EBController 
 {
 private static RMIServiceLocator rsl = null;
 	
-	public EBController(String[] args) throws RemoteException 
+	public EBController(String [] args) throws RemoteException 
 	{		
 		// Add your related code for the initialization of the Service Locator
 		rsl = new RMIServiceLocator();
 		rsl.setService(args[0], args[1], args[2]);
 				
-		new frInicioSesion(this);
+		new frPrincipal(this);
 //		new SwitchServerGUI(this);		
 	}
 	
