@@ -21,8 +21,8 @@ public class VueloController
 		return vuelos;
 	}
  
-	public void setVuelos(ArrayList<Vuelo> personas) {
-		this.vuelos = personas;
+	public void setVuelos(ArrayList<Vuelo> vuelos) {
+		this.vuelos = vuelos;
 	}
 
 }
