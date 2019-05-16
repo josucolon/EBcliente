@@ -13,6 +13,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import Controller.EBController;
+import LN.Usuario;
 import LN.Vuelo;
 import LN.VueloController;
 
@@ -50,27 +51,32 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 	private boolean ida, vuelta;
 	private ArrayList<Vuelo> listaVuelosIda;
 	private ArrayList<Vuelo> listaVuelosVuelta;
+	private EBController controller;
+	private Usuario usuario;
 	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					frBusqueda frame = new frBusqueda();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					frBusqueda frame = new frBusqueda();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
-	public frBusqueda() {
+	public frBusqueda(EBController controller, Usuario usuario) {
+		this.controller = controller;
+		this.usuario = usuario;
+		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 900, 400);
@@ -187,21 +193,21 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 					ida = validarFecha(fechaS);
 					Origen = (String) AerOrigen.getSelectedItem();
 					Destino = (String) AerDestino.getSelectedItem();
-					listaVuelosIda = EBController.buscarvuelo(Origen, Destino, fechaS);
+					listaVuelosIda = controller.buscarvuelo(Origen, Destino, fechaS);
 //					VueloController.getInstance().setVuelos(listaVuelosIda);
 					
 					if (SelectorIdaVuelta.isSelected()) 
 					{
 						fechaL = FechaVuelta.getText();
 						vuelta = validarFecha(fechaL);
-						listaVuelosVuelta = EBController.buscarvuelo(Destino, Origen, fechaL);
+						listaVuelosVuelta = controller.buscarvuelo(Destino, Origen, fechaL);
 //						VueloController.getInstance().setVuelos(listaVuelosVuelta);
 			        }
 					
 					if (vuelta == true && ida == true)
 					{
 						JOptionPane.showMessageDialog(this, "¡BÚSQUEDA REALIZADA!");
-						frResultadosBusqueda ventana = new frResultadosBusqueda(listaVuelosIda, listaVuelosVuelta);
+						frResultadosBusqueda ventana = new frResultadosBusqueda(listaVuelosIda, listaVuelosVuelta, controller, usuario);
 						ventana.setVisible(true);
 						dispose();
 					}
