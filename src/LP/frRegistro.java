@@ -187,6 +187,7 @@ public class frRegistro extends JFrame implements ActionListener
 				usuario.setEmail(txtCorreo.getText());
 				usuario.setAeropuerto_ident((String)CboxAeropuerto.getSelectedItem());
 				usuario.setContrasena(passwordField.getSelectedText());
+				
 				if(rdbtnPaypal.isSelected())
 				{
 					usuario.setPago("PAYPAL");
@@ -211,12 +212,12 @@ public class frRegistro extends JFrame implements ActionListener
 			} 
 			catch (RemoteException e1) 
 			{
-				// TODO Auto-generated catch block
+				
 				e1.printStackTrace();
 			}
 				
 				
-				frVisa ventana =new frVisa();
+				frBusqueda ventana =new frBusqueda(controller, usuario);
 				ventana.setVisible(true);
 				this.dispose();
 				break;

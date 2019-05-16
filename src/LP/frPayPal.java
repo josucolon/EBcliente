@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,6 +15,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import Controller.EBController;
+import LN.Usuario;
+
 public class frPayPal extends JFrame implements ActionListener
 {
 
@@ -22,14 +26,19 @@ public class frPayPal extends JFrame implements ActionListener
 	private JTextField txtUsuario;
 	private JPasswordField passwordField;
 	private JLabel lblPasswordIncorrecta;
-	private String usuario;
+	private String usu;
 	private String password;
 	private JButton btnAtras;
+	private EBController controller;
+	private Usuario usuario; 
 	/**
 	 * Create the application.
 	 */
-	public frPayPal() 
+	public frPayPal(EBController controller,Usuario usuario) 
 	{
+		this.controller=controller;
+		this.usuario=usuario;
+		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 281);
@@ -83,23 +92,27 @@ public class frPayPal extends JFrame implements ActionListener
 		switch (e.getActionCommand())
 		{
 			case "Pagar":
-				usuario= txtUsuario.getText();
+				
+				usu= txtUsuario.getText();
 				password= passwordField.getText();
 				
-				if(true)//usuario y contraseña correcta
+				try 
 				{
 					lblPasswordIncorrecta.setForeground(Color.green);
 					lblPasswordIncorrecta.setVisible(true);
-					
-					//frBusqueda busqueda =new frBusqueda();
-					//busqueda.setVisible(true);
+					controller.payPal(usu, password);
 				}
-				// usuario y/o contrasena incorrectas
-				lblPasswordIncorrecta.setVisible(true);
+				catch (RemoteException e1) 
+				{
+					lblPasswordIncorrecta.setForeground(Color.red);
+					lblPasswordIncorrecta.setVisible(true);
+					e1.printStackTrace();
+				}
+			
 				break;
 				
 			case "Atras":
-				frBusqueda ventana =new frBusqueda();
+				frBusqueda ventana =new frBusqueda(controller, usuario);
 				ventana.setVisible(true);
 				this.dispose();
 				

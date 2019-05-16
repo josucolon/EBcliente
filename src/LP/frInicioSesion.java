@@ -107,9 +107,9 @@ public class frInicioSesion extends JFrame implements ActionListener
 						lblPasswordIncorrecta.setForeground(Color.green);
 						lblPasswordIncorrecta.setVisible(true);
 						
-//						frBusqueda busqueda =new frBusqueda(controller, usuario);
-//						busqueda.setVisible(true);
-//						this.dispose();
+						frBusqueda busqueda =new frBusqueda(controller, usuario);
+						busqueda.setVisible(true);
+						this.dispose();
 					} 
 					catch (RemoteException e1) 
 					{
@@ -127,9 +127,9 @@ public class frInicioSesion extends JFrame implements ActionListener
 						lblPasswordIncorrecta.setForeground(Color.green);
 						lblPasswordIncorrecta.setVisible(true);
 						
-//						frBusqueda busqueda =new frBusqueda(controller, usuario);
-//						busqueda.setVisible(true);
-//						this.dispose();
+						frBusqueda busqueda =new frBusqueda(controller, usuario);
+						busqueda.setVisible(true);
+						this.dispose();
 					} 
 					catch (RemoteException e1) 
 					{

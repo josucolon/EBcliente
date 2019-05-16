@@ -5,10 +5,15 @@ import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Controller.EBController;
+import LN.Usuario;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
@@ -24,13 +29,17 @@ public class frVisa extends JFrame implements ActionListener
 	private JTextField txtFechCaducMes;
 	private JTextField txtFechCaducAno;
 	private JTextField txtCvv;
-	
+	private EBController controller;
+	private Usuario usuario;
 
 	/**
 	 * Create the application.
 	 */
-	public frVisa() 
+	public frVisa(EBController controller, Usuario usuario) 
 	{
+		this.controller=controller;
+		this.usuario=usuario;
+		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 316);
@@ -114,11 +123,26 @@ public class frVisa extends JFrame implements ActionListener
 		switch (e.getActionCommand())
 		{
 			case "Pagar":
+				String nombre=txtNombre.getText();
+				int numTarj=Integer.valueOf(txtNumTarjeta.getText());
+				int mes=Integer.valueOf(txtFechCaducMes.getText());
+				int ano=Integer.valueOf(txtFechCaducAno.getText());
+				int cvv= Integer.valueOf(txtCvv.getText());
+				
+				try 
+				{
+					controller.Visa(nombre, numTarj, mes, ano, cvv);
+				} 
+				catch (RemoteException e1) 
+				{
+				
+				e1.printStackTrace();
+				}
 				
 				break;
 				
 			case "Atras":
-				frBusqueda busq =new frBusqueda();
+				frBusqueda busq =new frBusqueda(controller, usuario);
 				busq.setVisible(true);
 				this.dispose();
 				

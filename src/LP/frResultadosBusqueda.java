@@ -50,9 +50,9 @@ public class frResultadosBusqueda extends JFrame implements ActionListener, List
 //		// TODO Auto-generated constructor stub
 //	}
 
-	/**
-	 * Launch the application.
-	 */
+//	/**
+//	 * Launch the application.
+//	 */
 //	public static void main(String[] args) {
 //		EventQueue.invokeLater(new Runnable() {
 //			public void run() {
