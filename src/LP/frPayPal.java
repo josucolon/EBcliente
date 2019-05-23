@@ -10,6 +10,7 @@ import java.rmi.RemoteException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -17,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 
 import Controller.EBController;
 import LN.Usuario;
+import LN.Vuelo;
 
 public class frPayPal extends JFrame implements ActionListener
 {
@@ -31,13 +33,16 @@ public class frPayPal extends JFrame implements ActionListener
 	private JButton btnAtras;
 	private EBController controller;
 	private Usuario usuario; 
+	private Vuelo vuelo;
+	private boolean aceptado;
 	/**
 	 * Create the application.
 	 */
-	public frPayPal(EBController controller,Usuario usuario) 
+	public frPayPal(EBController controller,Usuario usuario, Vuelo vuelo) 
 	{
 		this.controller=controller;
 		this.usuario=usuario;
+		this.vuelo=vuelo;
 		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -95,18 +100,24 @@ public class frPayPal extends JFrame implements ActionListener
 				
 				usu= txtUsuario.getText();
 				password= passwordField.getText();
-				
-				try 
+				double precio= 1;
+				String sistema_pago= usuario.getPago();
+	
+				aceptado= controller.pagar(usu, password, precio, sistema_pago);
+				if (aceptado==true)
 				{
 					lblPasswordIncorrecta.setForeground(Color.green);
 					lblPasswordIncorrecta.setVisible(true);
-					controller.payPal(usu, password);
+					frBusqueda ventana =new frBusqueda(controller, usuario);
+					ventana.setVisible(true);
+					this.dispose();
+					JOptionPane.showConfirmDialog(this, "Se ha realizado el pago correctamente");
 				}
-				catch (RemoteException e1) 
+				else
 				{
 					lblPasswordIncorrecta.setForeground(Color.red);
 					lblPasswordIncorrecta.setVisible(true);
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(this, "Los datos introducidos no son los correctos");
 				}
 			
 				break;

@@ -13,8 +13,10 @@ import javax.swing.border.EmptyBorder;
 
 import Controller.EBController;
 import LN.Usuario;
+import LN.Vuelo;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -31,14 +33,17 @@ public class frVisa extends JFrame implements ActionListener
 	private JTextField txtCvv;
 	private EBController controller;
 	private Usuario usuario;
+	private Vuelo vuelo;
+	private boolean aceptado;
 
 	/**
 	 * Create the application.
 	 */
-	public frVisa(EBController controller, Usuario usuario) 
+	public frVisa(EBController controller, Usuario usuario, Vuelo vuelo) 
 	{
 		this.controller=controller;
 		this.usuario=usuario;
+		this.vuelo=vuelo;
 		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -129,14 +134,22 @@ public class frVisa extends JFrame implements ActionListener
 				int ano=Integer.valueOf(txtFechCaducAno.getText());
 				int cvv= Integer.valueOf(txtCvv.getText());
 				
-				try 
-				{
-					controller.Visa(nombre, numTarj, mes, ano, cvv);
-				} 
-				catch (RemoteException e1) 
-				{
+				String user = usuario.getEmail();
+				String password= numTarj + "#" + mes + "#" + ano + "#" + cvv;
+				String sistema_pago =  usuario.getPago();
+				double precio = 1;
 				
-				e1.printStackTrace();
+				aceptado= controller.pagar(user, password, precio, sistema_pago);
+				if (aceptado=true)
+				{
+					frBusqueda ventana =new frBusqueda(controller, usuario);
+					ventana.setVisible(true);
+					this.dispose();
+					JOptionPane.showConfirmDialog(this, "Se ha realizado el pago correctamente");
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(this, "Los datos introducidos no son los correctos");
 				}
 				
 				break;

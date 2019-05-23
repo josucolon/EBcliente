@@ -71,17 +71,17 @@ private static RMIServiceLocator rsl = null;
 //    	rsl.getService().payPal(usuario, password);
 //    }
 	
-	public boolean registrar (Usuario usuario) throws RemoteException
+	public boolean registrar (Usuario usuario, String contrasena) throws RemoteException
 	{
 		boolean ret;
-		ret=rsl.getService().registrar(usuario);
+		ret=rsl.getService().registrar(usuario, contrasena);
 		return ret;
 	}
-	public boolean acceder (String usuario, String contrasena, String sistema_auto) throws RemoteException
+	public Usuario inicioSesion (String usuario, String contrasena, String sistema_auto) throws RemoteException
 	{
-		boolean ret;
-		ret=rsl.getService().acceder(usuario,contrasena, sistema_auto);
-		return ret;
+		Usuario usu;
+		usu=rsl.getService().inicioSesion(usuario,contrasena, sistema_auto);
+		return usu;
 	}
 	public LinkedList<Vuelo> getVuelos(String aer_origen, String aer_destino, String fecha_salida, String fecha_llegada) throws RemoteException
 	{
@@ -89,11 +89,16 @@ private static RMIServiceLocator rsl = null;
     	listaVuelos = rsl.getService().getVuelos(aer_origen, aer_destino, fecha_salida, fecha_llegada);
     	return listaVuelos;
 	}
-	public int pagar(String user,String password,double precio, String sistema_pago)
+	public boolean pagar(String user,String password,double precio, String sistema_pago)
 	{
-		int pago;
-		pago= rsl.getService().pagar(user, password, precio, sistema_pago);
-		return pago;
+		boolean aceptado;
+		aceptado= rsl.getService().pagar(user, password, precio, sistema_pago);
+		return aceptado;
+	}
+	
+	public void reservar (String codVuelo, String email)
+	{
+		rsl.getService().reservar(codVuelo, email);
 	}
     
     public void exit(){

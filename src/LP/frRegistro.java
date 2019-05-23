@@ -14,6 +14,7 @@ import Controller.EBController;
 import LN.Usuario;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
@@ -41,7 +42,7 @@ public class frRegistro extends JFrame implements ActionListener
 	private JRadioButton rdbtnVisa;
 	private JRadioButton rdbtnFacebook;
 	private JRadioButton rdbtnGoogle;
-
+	private boolean aceptado;
 	/**
 	 * Create the application.
 	 */
@@ -186,7 +187,6 @@ public class frRegistro extends JFrame implements ActionListener
 				usuario.setDni(txtDni.getText());
 				usuario.setEmail(txtCorreo.getText());
 				usuario.setAeropuerto_ident((String)CboxAeropuerto.getSelectedItem());
-				usuario.setContrasena(passwordField.getSelectedText());
 				
 				if(rdbtnPaypal.isSelected())
 				{
@@ -208,7 +208,17 @@ public class frRegistro extends JFrame implements ActionListener
 				
 			try 
 			{
-				controller.registro(usuario);
+				aceptado= controller.registrar(usuario, passwordField.getSelectedText());
+				if (aceptado==true)
+				{
+					frBusqueda ventana =new frBusqueda(controller, usuario);
+					ventana.setVisible(true);
+					this.dispose();
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(this, "El correo esta repetido");
+				}
 			} 
 			catch (RemoteException e1) 
 			{
@@ -216,10 +226,6 @@ public class frRegistro extends JFrame implements ActionListener
 				e1.printStackTrace();
 			}
 				
-				
-				frBusqueda ventana =new frBusqueda(controller, usuario);
-				ventana.setVisible(true);
-				this.dispose();
 				break;
 				
 			case "Atras":
