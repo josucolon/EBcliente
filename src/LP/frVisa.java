@@ -135,8 +135,8 @@ public class frVisa extends JFrame implements ActionListener
 				int ano=Integer.valueOf(txtFechCaducAno.getText());
 				int cvv= Integer.valueOf(txtCvv.getText());
 				
-				String user = usuario.getEmail();
-				String password= numTarj + "#" + mes + "#" + ano + "#" + cvv;
+				String user = txtNumTarjeta.getText();
+				String password= mes + "#" + ano + "#" + cvv;
 				String sistema_pago =  usuario.getPago();
 				double precio = vuelo.getPrecio();
 				
