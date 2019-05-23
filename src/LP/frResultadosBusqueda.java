@@ -102,14 +102,8 @@ public class frResultadosBusqueda extends JFrame implements ActionListener, List
 		listaIda = new JList(listModel);
 		listaIda.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listaIda.addListSelectionListener(this);
-		
-		
 	}
-//@Override
-//public void valueChanged(ListSelectionEvent e) {
-//	// TODO Auto-generated method stub
-//	
-//}
+
 @Override
 public void actionPerformed(ActionEvent e) {
 	// TODO Auto-generated method stub

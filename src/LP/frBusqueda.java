@@ -30,6 +30,7 @@ import javax.swing.JComboBox;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -56,19 +57,24 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 	
 	/**
 	 * Launch the application.
+	 * @throws RemoteException 
 	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					frBusqueda frame = new frBusqueda();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	public static void main(String[] args) throws RemoteException {
+		
+		EBController controller = new EBController(args);
+		Usuario usuario = null;
+		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					frBusqueda frame = new frBusqueda(controller, usuario);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
@@ -194,14 +200,14 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 					Origen = (String) AerOrigen.getSelectedItem();
 					Destino = (String) AerDestino.getSelectedItem();
 					listaVuelosIda = controller.buscarvuelo(Origen, Destino, fechaS);
-//					VueloController.getInstance().setVuelos(listaVuelosIda);
+
 					
 					if (SelectorIdaVuelta.isSelected()) 
 					{
 						fechaL = FechaVuelta.getText();
 						vuelta = validarFecha(fechaL);
-						listaVuelosVuelta = controller.buscarvuelo(Destino, Origen, fechaL);
-//						VueloController.getInstance().setVuelos(listaVuelosVuelta);
+//						listaVuelosVuelta = controller.buscarvuelo(Destino, Origen, fechaL);
+
 			        }
 					
 					if (vuelta == true && ida == true)
@@ -220,6 +226,7 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 //				}
 				catch (Exception b)
 				{
+//					System.out.println(b.toString());
 					JOptionPane.showMessageDialog(this, "Error en la introducción de algún dato");
 				}
 				break;
