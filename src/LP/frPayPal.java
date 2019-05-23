@@ -35,7 +35,7 @@ public class frPayPal extends JFrame implements ActionListener
 	private EBController controller;
 	private Usuario usuario; 
 	private VueloDTO vuelo;
-	private boolean aceptado;
+	private int codPago;
 	/**
 	 * Create the application.
 	 */
@@ -104,21 +104,22 @@ public class frPayPal extends JFrame implements ActionListener
 				double precio= 1;
 				String sistema_pago= usuario.getPago();
 	
-				aceptado= controller.pagar(usu, password, precio, sistema_pago);
-				if (aceptado==true)
+				codPago= controller.pagar(usu, password, precio, sistema_pago);
+				if (codPago==0)
+				{					
+					lblPasswordIncorrecta.setForeground(Color.red);
+					lblPasswordIncorrecta.setVisible(true);
+					JOptionPane.showMessageDialog(this, "Los datos introducidos no son los correctos");
+				}
+				else
 				{
+					controller.reservar(vuelo.getNumero(), codPago);
 					lblPasswordIncorrecta.setForeground(Color.green);
 					lblPasswordIncorrecta.setVisible(true);
 					frBusqueda ventana =new frBusqueda(controller, usuario);
 					ventana.setVisible(true);
 					this.dispose();
 					JOptionPane.showConfirmDialog(this, "Se ha realizado el pago correctamente");
-				}
-				else
-				{
-					lblPasswordIncorrecta.setForeground(Color.red);
-					lblPasswordIncorrecta.setVisible(true);
-					JOptionPane.showMessageDialog(this, "Los datos introducidos no son los correctos");
 				}
 			
 				break;

@@ -35,7 +35,7 @@ public class frVisa extends JFrame implements ActionListener
 	private EBController controller;
 	private Usuario usuario;
 	private VueloDTO vuelo;
-	private boolean aceptado;
+	private int codPago;
 
 	/**
 	 * Create the application.
@@ -138,19 +138,21 @@ public class frVisa extends JFrame implements ActionListener
 				String user = usuario.getEmail();
 				String password= numTarj + "#" + mes + "#" + ano + "#" + cvv;
 				String sistema_pago =  usuario.getPago();
-				double precio = 1;
+				double precio = vuelo.getPrecio();
 				
-				aceptado= controller.pagar(user, password, precio, sistema_pago);
-				if (aceptado=true)
+				codPago= controller.pagar(user, password, precio, sistema_pago);
+				if (codPago==0)
 				{
+					
+					JOptionPane.showMessageDialog(this, "Los datos introducidos no son los correctos");
+				}
+				else
+				{
+					controller.reservar(vuelo.getNumero(), codPago);
 					frBusqueda ventana =new frBusqueda(controller, usuario);
 					ventana.setVisible(true);
 					this.dispose();
 					JOptionPane.showConfirmDialog(this, "Se ha realizado el pago correctamente");
-				}
-				else
-				{
-					JOptionPane.showMessageDialog(this, "Los datos introducidos no son los correctos");
 				}
 				
 				break;
