@@ -3,6 +3,7 @@ package LP;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -13,9 +14,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import Controller.EBController;
+import DTO.VueloDTO;
 import LN.Usuario;
-import LN.Vuelo;
-import LN.VueloController;
+
 //import LN.clsGestor;
 //import LN.itfProperty;
 
@@ -31,8 +32,8 @@ import java.io.IOException;
 public class frResultadosBusqueda extends JFrame implements ActionListener, ListSelectionListener {
 
 	private JPanel contentPane;
-	private ArrayList<Vuelo> vuelosIda, vuelosVuelta;
-	private DefaultListModel<Vuelo> listModel;
+	private LinkedList<VueloDTO> vuelosIda, vuelosVuelta;
+	private DefaultListModel<VueloDTO> listModel;
 	private JList listaIda;	
 	private JList listaVuelta;
 	private EBController controller;
@@ -73,7 +74,7 @@ public class frResultadosBusqueda extends JFrame implements ActionListener, List
 	/**
 	 * Create the frame.
 	 */
-	public frResultadosBusqueda(ArrayList<Vuelo> listaVuelosIda, ArrayList<Vuelo> listaVuelosVuelta, EBController controller, Usuario usuario) throws IOException {
+	public frResultadosBusqueda(LinkedList<VueloDTO> listaVuelosIda, LinkedList<VueloDTO> listaVuelosVuelta, EBController controller, Usuario usuario) throws IOException {
 		this.controller = controller;
 		this.usuario = usuario;
 		
@@ -90,11 +91,11 @@ public class frResultadosBusqueda extends JFrame implements ActionListener, List
 		lblVuelosIda.setBounds(324, 16, 134, 20);
 		contentPane.add(lblVuelosIda);
 		
-		listModel = new DefaultListModel<Vuelo>();
+		listModel = new DefaultListModel<VueloDTO>();
 		
 		vuelosIda = listaVuelosIda;
 		
-		for (Vuelo a: vuelosIda)
+		for (VueloDTO a: vuelosIda)
 		{
 			listModel.addElement(a);
 		}

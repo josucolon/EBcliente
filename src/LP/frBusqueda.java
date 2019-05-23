@@ -3,6 +3,7 @@ package LP;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -13,9 +14,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import Controller.EBController;
+import DTO.VueloDTO;
 import LN.Usuario;
-import LN.Vuelo;
-import LN.VueloController;
+
 
 //import COMUN.clsActividadRepetida;
 //import LN.clsGestor;
@@ -50,8 +51,8 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 	private JLabel ADestino, AOrigen;
 	private String Origen, Destino, fechaS, fechaL;
 	private boolean ida, vuelta;
-	private ArrayList<Vuelo> listaVuelosIda;
-	private ArrayList<Vuelo> listaVuelosVuelta;
+	private LinkedList<VueloDTO> listaVuelosIda;
+	private LinkedList<VueloDTO> listaVuelosVuelta;
 	private EBController controller;
 	private Usuario usuario;
 	
@@ -199,7 +200,7 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 					ida = validarFecha(fechaS);
 					Origen = (String) AerOrigen.getSelectedItem();
 					Destino = (String) AerDestino.getSelectedItem();
-					listaVuelosIda = controller.buscarvuelo(Origen, Destino, fechaS);
+					listaVuelosIda = controller.getVuelos(Origen, Destino, fechaS, null);
 
 					
 					if (SelectorIdaVuelta.isSelected()) 

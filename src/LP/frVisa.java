@@ -12,8 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Controller.EBController;
+import DTO.VueloDTO;
 import LN.Usuario;
-import LN.Vuelo;
+
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -33,13 +34,13 @@ public class frVisa extends JFrame implements ActionListener
 	private JTextField txtCvv;
 	private EBController controller;
 	private Usuario usuario;
-	private Vuelo vuelo;
+	private VueloDTO vuelo;
 	private boolean aceptado;
 
 	/**
 	 * Create the application.
 	 */
-	public frVisa(EBController controller, Usuario usuario, Vuelo vuelo) 
+	public frVisa(EBController controller, Usuario usuario, VueloDTO vuelo) 
 	{
 		this.controller=controller;
 		this.usuario=usuario;
