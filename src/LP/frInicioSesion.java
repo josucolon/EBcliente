@@ -103,7 +103,7 @@ public class frInicioSesion extends JFrame implements ActionListener
 				{
 					try 
 					{
-						usuario = controller.InicioSesionG(correo, password);
+						usuario = controller.acceder(usuario, password, FoG);
 						lblPasswordIncorrecta.setForeground(Color.green);
 						lblPasswordIncorrecta.setVisible(true);
 						
@@ -123,7 +123,7 @@ public class frInicioSesion extends JFrame implements ActionListener
 				{
 					try 
 					{
-						usuario = controller.InicioSesionF(correo, password);
+						usuario = controller.acceder(usuario, password, FoG);
 						lblPasswordIncorrecta.setForeground(Color.green);
 						lblPasswordIncorrecta.setVisible(true);
 						
