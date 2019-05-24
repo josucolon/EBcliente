@@ -28,18 +28,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 //import LN.itfProperty;
 import java.io.IOException;
+import javax.swing.JButton;
 
 public class frResultadosBusqueda extends JFrame implements ActionListener, ListSelectionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private LinkedList<VueloDTO> vuelosIda, vuelosVuelta;
 	private DefaultListModel<VueloDTO> listModel;
-	private JList listaIda;	
-	private JList listaVuelta;
+	private JList listaVuelos;	
+	private JList<VueloDTO> list = new JList<VueloDTO>();
 	private EBController controller;
 	private Usuario usuario;
-	private JTextField textField;
-	private JTextField txtXvsd;
+	private JButton btnPago ;
+	private JLabel lblSelect;
+	private VueloDTO vueloSelect;
 //	public frResultadosBusqueda(ArrayList<Vuelo> listaVuelosIda, ArrayList<Vuelo> listaVuelosVuelta) {
 //		// TODO Auto-generated constructor stub
 //		vuelosIda = listaVuelosIda;
@@ -86,28 +92,65 @@ public class frResultadosBusqueda extends JFrame implements ActionListener, List
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblVuelosIda = new JLabel("VUELOS IDA");
+		JLabel lblVuelosIda = new JLabel("VUELOS");
 		lblVuelosIda.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		lblVuelosIda.setBounds(324, 16, 134, 20);
+		lblVuelosIda.setBounds(352, 16, 134, 20);
 		contentPane.add(lblVuelosIda);
+		
+		
+		list.setBounds(383, 101, 1, 1);
+		contentPane.add(list);
+		
+		btnPago = new JButton("PAGAR");
+		btnPago.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		btnPago.setBounds(352, 303, 115, 29);
+		contentPane.add(btnPago);
+		
+		lblSelect = new JLabel("SELECCIONA UN VUELO");
+		lblSelect.setBounds(309, 310, 193, 20);
+		contentPane.add(lblSelect);
 		
 		listModel = new DefaultListModel<VueloDTO>();
 		
 		vuelosIda = listaVuelosIda;
+		vuelosVuelta = listaVuelosVuelta;
 		
 		for (VueloDTO a: vuelosIda)
 		{
 			listModel.addElement(a);
 		}
 		
-		listaIda = new JList(listModel);
-		listaIda.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listaIda.addListSelectionListener(this);
+		for (VueloDTO a: vuelosVuelta)
+		{
+			listModel.addElement(a);
+		}
+		
+		list = new JList<VueloDTO>(listModel);
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.addListSelectionListener(this);
 	}
 
 @Override
 public void actionPerformed(ActionEvent e) {
 	// TODO Auto-generated method stub
+	switch (e.getActionCommand())
+	{
+		case "PAGAR":
+			vueloSelect = list.getSelectedValue();
+			if (usuario.getPago() == "VISA")
+			{
+				frVisa ventana = new frVisa(this.controller, this.usuario, vueloSelect);
+				ventana.setVisible(true);
+				dispose();
+			}
+			if (usuario.getPago() == "PAYPAL")
+			{
+				frPayPal ventana = new frPayPal(this.controller, this.usuario, vueloSelect);
+				ventana.setVisible(true);
+				dispose();
+			}
+			break;
+	}
 	
 }
 	
@@ -115,13 +158,15 @@ public void actionPerformed(ActionEvent e) {
 	{
 		if (arg0.getValueIsAdjusting() == false)
 		{
-			if (listaIda.getSelectedIndex()==-1)
+			if (list.getSelectedIndex()==-1)
 			{
-//				btnModificar.setEnabled(false);
+				btnPago.setEnabled(false);
+				lblSelect.setEnabled(true);
 			}
 			else
 			{
-//				btnModificar.setEnabled(true);
+				btnPago.setEnabled(true);
+				lblSelect.setEnabled(false);
 			}
 		}
 	}

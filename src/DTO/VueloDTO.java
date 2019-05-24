@@ -100,8 +100,11 @@ public String getHoraLlegada() {
 
 	@Override
 	public String toString() {
-		return "VueloDTO [Aero_orig=" + Aero_orig + ", Aero_dest=" + Aero_dest + ", horaLlegada=" + horaLlegada
-				+ ", horaSalida=" + horaSalida + ", fecha=" + fecha + ", precio=" + precio + "]";
+//		return "VueloDTO [Aero_orig=" + Aero_orig + ", Aero_dest=" + Aero_dest + ", horaLlegada=" + horaLlegada
+//				+ ", horaSalida=" + horaSalida + ", fecha=" + fecha + ", precio=" + precio + "]";
+		return "ORIGEN: " + this.Aero_orig + ", DESTINO: " + this.Aero_dest + ", FECHA: " + this.fecha + 
+				", HORA SALIDA: " + this.horaSalida + ", HORA LLEGADA: " + this.horaLlegada + 
+				", PRECIO: " + this.precio + ", PLAZAS DISPONIBLES: " + this.plazas;
 	}
 
 	//	public ArrayList<Reserva> getReservas() {
