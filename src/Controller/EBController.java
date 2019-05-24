@@ -30,7 +30,7 @@ private static RMIServiceLocator rsl = null;
 //	public void switchServer(String ip, String port, String name)
 //	{
 //		
-//		// Add your code related to switching servers		
+//		// Add your code related to switching servers		git g
 //		System.out.println("- Switching to server: " + ip + ":" + port + "/" + name);
 //	}
   
