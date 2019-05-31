@@ -195,7 +195,7 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 					System.out.println("hola");
 					vuelta = true;
 					fechaL = null;
-					listaVuelosVuelta = null;
+//					listaVuelosVuelta = null;
 					fechaS = FechaIda.getText();
 					ida = validarFecha(fechaS);
 					Origen = (String) AerOrigen.getSelectedItem();
@@ -207,7 +207,7 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 					{
 						fechaL = FechaVuelta.getText();
 						vuelta = validarFecha(fechaL);
-//						listaVuelosVuelta = controller.buscarvuelo(Destino, Origen, fechaL);
+						listaVuelosVuelta = controller.getVuelos(Destino, Origen, fechaL, null);
 
 			        }
 					

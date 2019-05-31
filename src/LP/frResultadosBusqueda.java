@@ -105,10 +105,13 @@ public class frResultadosBusqueda extends JFrame implements ActionListener, List
 		btnPago.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		btnPago.setBounds(352, 303, 115, 29);
 		contentPane.add(btnPago);
+		btnPago.setVisible(false);
 		
 		lblSelect = new JLabel("SELECCIONA UN VUELO");
-		lblSelect.setBounds(309, 310, 193, 20);
+		lblSelect.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblSelect.setBounds(352, 303, 115, 29);
 		contentPane.add(lblSelect);
+		lblSelect.setVisible(true);
 		
 		listModel = new DefaultListModel<VueloDTO>();
 		
@@ -160,13 +163,13 @@ public void actionPerformed(ActionEvent e) {
 		{
 			if (list.getSelectedIndex()==-1)
 			{
-				btnPago.setEnabled(false);
-				lblSelect.setEnabled(true);
+				btnPago.setVisible(false);
+				lblSelect.setVisible(true);
 			}
 			else
 			{
-				btnPago.setEnabled(true);
-				lblSelect.setEnabled(false);
+				btnPago.setVisible(true);
+				lblSelect.setVisible(false);
 			}
 		}
 	}
