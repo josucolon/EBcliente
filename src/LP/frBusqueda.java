@@ -56,26 +56,7 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 	private EBController controller;
 	private Usuario usuario;
 	
-	/**
-	 * Launch the application.
-	 * @throws RemoteException 
-	 */
-	public static void main(String[] args) throws RemoteException {
-		
-		EBController controller = new EBController(args);
-		Usuario usuario = null;
-		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					frBusqueda frame = new frBusqueda(controller, usuario);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
