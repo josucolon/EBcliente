@@ -176,7 +176,6 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 					System.out.println("hola");
 					vuelta = true;
 					fechaL = null;
-//					listaVuelosVuelta = null;
 					fechaS = FechaIda.getText();
 					ida = validarFecha(fechaS);
 					Origen = (String) AerOrigen.getSelectedItem();
@@ -201,14 +200,9 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 					}
 					else
 						JOptionPane.showMessageDialog(this, "¡FECHA INCORRECTA!");
-				}
-//				catch (clsActividadRepetida a)
-//				{
-//					JOptionPane.showMessageDialog(this, a.getMessage());
-//				}
+				}			
 				catch (Exception b)
 				{
-//					System.out.println(b.toString());
 					JOptionPane.showMessageDialog(this, "Error en la introducción de algún dato");
 				}
 				break;

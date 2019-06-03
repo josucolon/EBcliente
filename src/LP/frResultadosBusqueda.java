@@ -9,6 +9,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -32,54 +33,19 @@ import javax.swing.JButton;
 
 public class frResultadosBusqueda extends JFrame implements ActionListener, ListSelectionListener {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private LinkedList<VueloDTO> vuelosIda, vuelosVuelta;
-	private DefaultListModel<VueloDTO> listModel;
-	private JList listaVuelos;	
-	private JList<VueloDTO> list = new JList<VueloDTO>();
-	private EBController controller;
-	private Usuario usuario;
+	private DefaultListModel listModel;
+	private JList list;
 	private JButton btnPago ;
 	private JLabel lblSelect;
 	private VueloDTO vueloSelect;
-//	public frResultadosBusqueda(ArrayList<Vuelo> listaVuelosIda, ArrayList<Vuelo> listaVuelosVuelta) {
-//		// TODO Auto-generated constructor stub
-//		vuelosIda = listaVuelosIda;
-//		vuelosVuelta = listaVuelosVuelta;
-//		
-//	}
-//
-//	public frResultadosBusqueda() {
-//		// TODO Auto-generated constructor stub
-//	}
+	private JScrollPane scrollLista;
+	private EBController controller;
+	private Usuario usuario;
 
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					frResultadosBusqueda frame = new frResultadosBusqueda();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	
-
-	
-
-	/**
-	 * Create the frame.
-	 */
 	public frResultadosBusqueda(LinkedList<VueloDTO> listaVuelosIda, LinkedList<VueloDTO> listaVuelosVuelta, EBController controller, Usuario usuario) throws IOException {
 		this.controller = controller;
 		this.usuario = usuario;
@@ -98,37 +64,41 @@ public class frResultadosBusqueda extends JFrame implements ActionListener, List
 		contentPane.add(lblVuelosIda);
 		
 		
-		list.setBounds(383, 101, 1, 1);
-		contentPane.add(list);
-		
 		btnPago = new JButton("PAGAR");
 		btnPago.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnPago.setBounds(352, 303, 115, 29);
+		btnPago.setBounds(341, 342, 115, 29);
 		contentPane.add(btnPago);
 		btnPago.setVisible(false);
 		
 		lblSelect = new JLabel("SELECCIONA UN VUELO");
-		lblSelect.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		lblSelect.setBounds(352, 303, 115, 29);
+		lblSelect.setBounds(310, 320, 193, 20);
 		contentPane.add(lblSelect);
 		lblSelect.setVisible(true);
 		
-		listModel = new DefaultListModel<VueloDTO>();
+		JPanel panel = new JPanel();
+		panel.setBounds(15, 52, 808, 235);
+		contentPane.add(panel);
 		
+		listModel = new DefaultListModel();
 		vuelosIda = listaVuelosIda;
 		vuelosVuelta = listaVuelosVuelta;
 		
+		for (VueloDTO a: vuelosVuelta)
+	    {
+	    	vuelosIda.add(a);
+	    }
 		for (VueloDTO a: vuelosIda)
 		{
-			listModel.addElement(a);
+			listModel.addElement(a.toString());
 		}
 		
-		for (VueloDTO a: vuelosVuelta)
-		{
-			listModel.addElement(a);
-		}
 		
-		list = new JList<VueloDTO>(listModel);
+		
+		list = new JList(listModel);
+//		list.setBounds(383, 101, 1, 1);
+//		contentPane.add(list);
+		scrollLista = new JScrollPane(list);
+		panel.add(scrollLista);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.addListSelectionListener(this);
 	}
@@ -139,7 +109,7 @@ public void actionPerformed(ActionEvent e) {
 	switch (e.getActionCommand())
 	{
 		case "PAGAR":
-			vueloSelect = list.getSelectedValue();
+			vueloSelect = (VueloDTO) list.getSelectedValue();
 			if (usuario.getPago() == "VISA")
 			{
 				frVisa ventana = new frVisa(this.controller, this.usuario, vueloSelect);
