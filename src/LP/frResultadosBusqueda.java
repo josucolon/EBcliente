@@ -82,6 +82,10 @@ public class frResultadosBusqueda extends JFrame implements ActionListener, List
 		listModel = new DefaultListModel();
 		vuelosIda = listaVuelosIda;
 		vuelosVuelta = listaVuelosVuelta;
+		if (vuelosIda.get(0) == vuelosVuelta.get(0))
+		{
+			vuelosVuelta.removeFirst();
+		}
 		
 		for (VueloDTO a: vuelosVuelta)
 	    {
@@ -95,8 +99,6 @@ public class frResultadosBusqueda extends JFrame implements ActionListener, List
 		
 		
 		list = new JList(listModel);
-//		list.setBounds(383, 101, 1, 1);
-//		contentPane.add(list);
 		scrollLista = new JScrollPane(list);
 		panel.add(scrollLista);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
