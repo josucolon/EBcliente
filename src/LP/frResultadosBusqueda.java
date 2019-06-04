@@ -99,6 +99,7 @@ public class frResultadosBusqueda extends JFrame implements ActionListener, List
 		
 		
 		list = new JList(listModel);
+		list.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		scrollLista = new JScrollPane(list);
 		panel.add(scrollLista);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
