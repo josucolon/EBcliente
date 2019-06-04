@@ -173,7 +173,6 @@ public class frBusqueda extends JFrame implements ChangeListener, ActionListener
 			case "BUSCAR":
 				try
 				{
-					System.out.println("hola");
 					vuelta = true;
 					fechaL = null;
 					fechaS = FechaIda.getText();
