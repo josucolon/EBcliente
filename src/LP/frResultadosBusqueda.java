@@ -82,10 +82,10 @@ public class frResultadosBusqueda extends JFrame implements ActionListener, List
 		listModel = new DefaultListModel();
 		vuelosIda = listaVuelosIda;
 		vuelosVuelta = listaVuelosVuelta;
-		if (vuelosIda.get(0) == vuelosVuelta.get(0))
-		{
-			vuelosVuelta.removeFirst();
-		}
+//		if (vuelosIda.get(0) == vuelosVuelta.get(0))
+//		{
+//			vuelosVuelta.removeFirst();
+//		}
 		
 		for (VueloDTO a: vuelosVuelta)
 	    {
